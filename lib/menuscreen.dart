@@ -76,7 +76,8 @@ class _MenuscreenState extends State<Menuscreen> {
                         context.read<MenucardBloc>().add(addtocart(updateitem: updateitem));
                       }
                       if(!updateitem.isadded){
-                        context.read<MenucardBloc>().add(removetocart(updateitem: updateitem));
+                        
+                        context.read<MenucardBloc>().add(removetocart(updateitem: state.itemlist[index]));
                         
                       }
                      }, 
