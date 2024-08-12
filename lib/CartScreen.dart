@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_cart_with_bloc/bloc/bloc/menucard_bloc.dart';
-import 'package:shopping_cart_with_bloc/model/item.dart';
+
 import 'package:shopping_cart_with_bloc/networkimagewidget.dart';
 
 class Cartscreen extends StatefulWidget {
@@ -16,18 +16,36 @@ class _CartscreenState extends State<Cartscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Cart')),
+        title: Text('Cart'),
       ),
       body: BlocBuilder<MenucardBloc, MenucardState>(
         
         builder: (context, state) {
-          print('hello');
+         
          /*  final filteredList = state.itemlist.where((item) => item.isadded).toList();
 
           if (filteredList.isEmpty) {
             return Center(child: Text('No items in the cart.', style: TextStyle(color: Colors.white)));
           }
-         Another method rather than creating list */
+         Another method for adding in cart  rather than creating list */
+
+
+         if(state.cartlist.isEmpty){
+          
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              
+                  Center(child: Text('Cart is Empty!')),
+              
+              
+            ],
+          );
+          
+        
+         }
+         else{
           return ListView.builder(
             itemCount: state.cartlist.length,
             
@@ -55,10 +73,14 @@ class _CartscreenState extends State<Cartscreen> {
                           Text(item.productName,style: TextStyle(fontSize: 18,color: Colors.white),),
                           Text(item.productDescription ,style: TextStyle(fontSize: 14,color: Colors.white),),
                           Text(r"$"+item.unitPrice.toString(),style: TextStyle(fontSize: 16,color: Colors.white),),
+                         
                         ],
                        ),
                      ),
-              
+                  
+              ElevatedButton(onPressed: (){}, child: Icon(Icons.remove)),
+              Text('  1  ',style: TextStyle(fontSize: 18,color: Colors.white),),
+              ElevatedButton(onPressed: (){}, child: Icon(Icons.add)),
                       
                     
                      
@@ -71,12 +93,13 @@ class _CartscreenState extends State<Cartscreen> {
                   
                 ),
               );
-              
- 
-     }
+            }     
+            
+     
             
             );
-        },
+        }
+        }
       ),
     );
   }

@@ -24,14 +24,17 @@ class _MenuscreenState extends State<Menuscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text('Menu')),
+      appBar: AppBar(title: Text('Menu'),
       actions: [
-        IconButton(onPressed: (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Cartscreen()),
-            );
-        }, icon: Icon(Icons.shopping_cart))
+        Visibility(
+          child: IconButton(onPressed: (){
+            
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Cartscreen()),
+              );
+          }, icon: Icon(Icons.shopping_cart)),
+        )
       ],
       ),
      
