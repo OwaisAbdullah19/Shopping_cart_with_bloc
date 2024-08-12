@@ -1,8 +1,29 @@
 part of 'menucard_bloc.dart';
 
-sealed class MenucardEvent extends Equatable {
+ class MenucardEvent extends Equatable {
   const MenucardEvent();
 
   @override
   List<Object> get props => [];
+}
+ class showmenu extends MenucardEvent{}
+ 
+ class updatelist extends MenucardEvent{
+ final Item updateitem;
+ updatelist({required this.updateitem});
+   @override
+  List<Object> get props => [updateitem];
+
+ }
+class addtocart extends MenucardEvent{
+final Item updateitem;
+ addtocart({required this.updateitem});
+   @override
+  List<Object> get props => [updateitem];
+}
+class removetocart extends MenucardEvent{
+final Item updateitem;
+ removetocart({required this.updateitem});
+   @override
+  List<Object> get props => [updateitem];
 }

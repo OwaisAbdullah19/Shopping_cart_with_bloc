@@ -1,50 +1,42 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_cart_with_bloc/CartScreen.dart';
 import 'package:shopping_cart_with_bloc/bloc/bloc/menucard_bloc.dart';
 import 'package:shopping_cart_with_bloc/model/item.dart';
 import 'package:shopping_cart_with_bloc/networkimagewidget.dart';
 
-
-class Menuscreen extends StatefulWidget {
-  const Menuscreen(  {super.key});
+class Cartscreen extends StatefulWidget {
+  const Cartscreen({super.key});
 
   @override
-  State<Menuscreen> createState() => _MenuscreenState();
+  State<Cartscreen> createState() => _CartscreenState();
 }
 
-class _MenuscreenState extends State<Menuscreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    context.read<MenucardBloc>().add(showmenu());
-  }
+class _CartscreenState extends State<Cartscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text('Menu')),
-      actions: [
-        IconButton(onPressed: (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Cartscreen()),
-            );
-        }, icon: Icon(Icons.shopping_cart))
-      ],
+      appBar: AppBar(
+        title: Center(child: Text('Cart')),
       ),
-     
       body: BlocBuilder<MenucardBloc, MenucardState>(
-        buildWhen: (previous, current) => previous.itemlist != current.itemlist,
+        
         builder: (context, state) {
+          print('hello');
+         /*  final filteredList = state.itemlist.where((item) => item.isadded).toList();
+
+          if (filteredList.isEmpty) {
+            return Center(child: Text('No items in the cart.', style: TextStyle(color: Colors.white)));
+          }
+         Another method rather than creating list */
           return ListView.builder(
-            itemCount: state.itemlist.length,
+            itemCount: state.cartlist.length,
+            
             itemBuilder: (context,index){
-              final item = state.itemlist[index];
+              final item = state.cartlist[index];
+              
               return Card(
                 child: Column(
-                  children: [
+                children: [
                     Row(
                       children: [
                         
@@ -66,23 +58,11 @@ class _MenuscreenState extends State<Menuscreen> {
                         ],
                        ),
                      ),
-                     ElevatedButton(onPressed: (){
-                      Item updateitem = Item(unitPrice: item.unitPrice,isadded: item.isadded?false:true, productName: item.productName,
-                        productId: item.productId, productDescription: item.productDescription,productThumbnail: item.productThumbnail
-                      );
+              
                       
-                      context.read<MenucardBloc>().add(updatelist(updateitem: updateitem));
-                      if(updateitem.isadded){
-                        context.read<MenucardBloc>().add(addtocart(updateitem: updateitem));
-                      }
-                      if(!updateitem.isadded){
-                        context.read<MenucardBloc>().add(removetocart(updateitem: updateitem));
-                        
-                      }
-                     }, 
-                     child: item.isadded ? Text('   Remove   ') : Text('Add To Cart'),
+                    
                      
-                     ),
+                  
                      
                       ],
                       
@@ -94,6 +74,7 @@ class _MenuscreenState extends State<Menuscreen> {
               
  
      }
+            
             );
         },
       ),

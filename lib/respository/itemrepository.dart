@@ -12,9 +12,8 @@ class Itemrepository {
   ] ;
    
 
-   Future< List<Item>> fetchlist() async {
-    await Future.delayed(Duration(seconds: 3));
-  return itemsList;
+    List<Item> fetchlist()  {
+     return itemsList;
    }
   }
 
