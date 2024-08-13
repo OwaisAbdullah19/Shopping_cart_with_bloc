@@ -30,5 +30,23 @@ class MenucardBloc extends Bloc<MenucardEvent, MenucardState> {
       tempcartlist.remove(event.updateitem);
        emit(state.copyWith(cartlist: List.from(tempcartlist)));
     });
+
+    on<Increasequantity>((event, emit) {
+       final index = tempcartlist.indexWhere((test) => test.productId == event.updateitem.productId );
+      tempcartlist[index] = event.updateitem;
+      tempcartlist[index].quantity++;
+       emit(state.copyWith(cartlist: List.from(tempcartlist)));
+    });
+
+    on<Decreasequantity>((event, emit) {
+        final index = tempcartlist.indexWhere((test) => test.productId == event.updateitem.productId );
+      tempcartlist[index] = event.updateitem;
+      if(tempcartlist[index].quantity>1){
+         tempcartlist[index].quantity--;
+
+      }
+      
+       emit(state.copyWith(cartlist: List.from(tempcartlist)));
+    });
   }
 }

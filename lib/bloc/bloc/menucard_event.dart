@@ -27,3 +27,19 @@ final Item updateitem;
    @override
   List<Object> get props => [updateitem];
 }
+
+
+class Increasequantity extends MenucardEvent{
+final Item updateitem;
+ Increasequantity({required this.updateitem});
+   @override
+  List<Object> get props => [updateitem];
+}
+
+
+class Decreasequantity extends MenucardEvent{
+final Item updateitem;
+ Decreasequantity({required this.updateitem});
+   @override
+  List<Object> get props => [updateitem];
+}
